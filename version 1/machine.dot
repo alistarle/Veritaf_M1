@@ -1,9 +1,0 @@
-digraph system {
-_1[label="", shape=none ];
-_1->1;
-_0[label="", shape=none ];
-_0->0;
-1 [label= "1 [active]"];
-0 [label= "0 [passive]"];
-1->0 [label= "a"];
-}
