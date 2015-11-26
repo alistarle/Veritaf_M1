@@ -1,0 +1,32 @@
+machine = [active,passive]{
+	etat = 2;
+	init = 0,1;
+	0 = passive;
+	1 = active;
+	1 -> 0[a];
+};;
+
+probe = [debut,fin]{
+	etat = 5;
+	init = 0;
+	0 = debut;
+	5 = fin;
+	0 -> 1 [p0]; 
+	1 -> 2 [p2];
+	2 -> 3 [p1];
+	3 -> 4;
+	4 -> 5 [sc];
+};;
+
+todot machine.dot machine;;
+todot probe.dot probe;;
+
+synchro =< machine m0, machine m2 , machine m1, probe p>{
+	< a , _ , _ , p2 >;
+	< _ , a , _ , p1 >;
+	< _ , _ , a , p0 >;
+		
+};;
+refuse = synchro -> (m0.active || m1.active || m2.active )&& p.fin;;
+
+todot refuse.dot refuse;;

@@ -1,0 +1,15 @@
+digraph system {
+_0[label="", shape=none ];
+_0->0;
+1 [label= "1 "];
+3 [label= "3 "];
+2 [label= "2 "];
+4 [label= "4 "];
+0 [label= "0 [debut]"];
+3->4 [label= ""];
+1->2 [label= "p2"];
+2->3 [label= "p1"];
+4->5 [label= "sc"];
+4->1 [label= "p0"];
+0->1 [label= "p0"];
+}
