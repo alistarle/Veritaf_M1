@@ -5,29 +5,33 @@ machine = [active,passive]{
 	1 = active;
 	1 -> 0[p];
 	0 -> 1[a];
+	1 -> 1[v];
 };;
 
 probe = [debut,fin]{
 	etat = 5;
 	init = 0;
 	0 = debut;
-	5 = fin;
-	0 -> 1 [p0]; 
-	1 -> 2 [p2];
-	2 -> 3 [p1];
-	3 -> 4;
-	4 -> 5 [sc];
-	4 -> 1;
+	4 = fin;
+	0 -> 1 [p2]; 
+	1 -> 2 [p1];
+	2 -> 3 [p0];
+	3 -> 4 [fin];
 };;
 
 todot machine.dot machine;;
 todot probe.dot probe;;
 
 synchro =< machine m0, machine m2 , machine m1, probe p>{
-	< a , _ , _ , p2 >;
-	< _ , a , _ , p1 >;
-	< _ , _ , a , p0 >;
-		
+	< p , _ , _ , p2 >;
+	< _ , p , _ , p1 >;
+	< _ , _ , p , p0 >;
+	< v , a , _ , _ >;
+	< v , _ , a , _ >;
+	< _ , v , a , _ >;
+	< a , v , _ , _ >;
+	< a , _ , v , _ >;
+	< _ , a , v , _ >;
 };;
 refuse = synchro -> (m0.active || m1.active || m2.active )&& p.fin;;
 
