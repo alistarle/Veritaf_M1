@@ -29,3 +29,11 @@ synchro =< machine m0, machine m2 , machine m1, probe p>{
 refuse = synchro -> (m0.active || m1.active || m2.active )&& p.fin;;
 
 todot refuse.dot refuse;;
+
+okCTL = synchro -> (m0.passive && m1.passive && m2.passive && p.fin);;
+okCTL += AG <- AG(m0.passive && m1.passive && m2.passive && p.fin);;
+
+todot okCTL.dot okCTL;;
+
+okLTL = automaton okCTL;;
+todot okLTL.dot okLTL;;
