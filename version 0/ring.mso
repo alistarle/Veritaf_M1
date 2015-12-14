@@ -2,19 +2,18 @@ machine = [active,passive]{
 	etat = 2;
 	init = 0,1;
 	0 = passive;
-	1 = active;
-	1 -> 0[p];
+        1 = active;
+        1 -> 0;
+        0 -> 0[p];
 };;
 
 probe = [debut,fin]{
-	etat = 5;
-	init = 0;
-	0 = debut;
-	4 = fin;
-	0 -> 1 [p2]; 
-	1 -> 2 [p1];
-	2 -> 3 [p0];
-	3 -> 4 [fin];
+	etat = 4;
+        init = 0;
+        3 = fin;
+        0 -> 1 [p2];
+        1 -> 2 [p1];
+        2 -> 3 [p0];
 };;
 
 todot machine.dot machine;;
